@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:junkim_velog/constants/sizes.dart';
 
@@ -13,12 +14,11 @@ class PracticePageItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void onItemTapped() {
-      Navigator.push(
+    void onItemTapped() async {
+      await Navigator.push(
         context,
-        MaterialPageRoute(
+        CupertinoPageRoute(
           builder: (context) => targetScreen,
-          fullscreenDialog: true,
         ),
       );
     }

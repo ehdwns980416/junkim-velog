@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:junkim_velog/constants/sizes.dart';
+import 'package:junkim_velog/screens/practices/kakao_address_screen.dart';
 import 'package:junkim_velog/widgets/practice_page_item.dart';
 
 class PracticePage {
@@ -55,7 +56,7 @@ class _PracticePageListScreenState extends State<PracticePageListScreen> {
                       for (int i = 0; i < pages.length; i++)
                         PracticePageItem(
                           label: pages[i].label,
-                          targetScreen: Container(),
+                          targetScreen: KakaoAddressScreen(),
                         ),
                     ],
                   ),
