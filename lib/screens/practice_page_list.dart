@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:junkim_velog/constants/sizes.dart';
+import 'package:junkim_velog/screens/practices/cupertino_datepicker_screen.dart';
 import 'package:junkim_velog/screens/practices/hyperlink_screen.dart';
 import 'package:junkim_velog/screens/practices/kakao_address_screen.dart';
 import 'package:junkim_velog/widgets/practice_page_item.dart';
@@ -32,6 +33,10 @@ class _PracticePageListScreenState extends State<PracticePageListScreen> {
     PracticePage(
       label: '하이퍼링크',
       targetScreen: const HyperlinkScreen(),
+    ),
+    PracticePage(
+      label: 'Cupertino Datepicker',
+      targetScreen: CupertinoDatepickerScreen(),
     ),
   ];
 
