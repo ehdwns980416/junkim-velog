@@ -3,6 +3,7 @@ import 'package:junkim_velog/constants/sizes.dart';
 import 'package:junkim_velog/screens/practices/cupertino_datepicker_screen.dart';
 import 'package:junkim_velog/screens/practices/hyperlink_screen.dart';
 import 'package:junkim_velog/screens/practices/kakao_address_screen.dart';
+import 'package:junkim_velog/screens/practices/system_ui_mode_screen.dart';
 import 'package:junkim_velog/widgets/practice_page_item.dart';
 
 class PracticePage {
@@ -36,7 +37,11 @@ class _PracticePageListScreenState extends State<PracticePageListScreen> {
     ),
     PracticePage(
       label: 'Cupertino Datepicker',
-      targetScreen: CupertinoDatepickerScreen(),
+      targetScreen: const CupertinoDatepickerScreen(),
+    ),
+    PracticePage(
+      label: 'System UI Mode',
+      targetScreen: const SystemUIModeScreen(),
     ),
   ];
 
