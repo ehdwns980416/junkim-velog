@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:junkim_velog/constants/gaps.dart';
+import 'package:junkim_velog/utils/logger.dart';
 
 class CountdownScreen extends StatefulWidget {
   const CountdownScreen({super.key});
@@ -12,38 +13,36 @@ class CountdownScreen extends StatefulWidget {
 }
 
 class _CountdownScreenState extends State<CountdownScreen>
-    with TickerProviderStateMixin {
-  late AnimationController controller;
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  // final ValueNotifier<Tween<double>> _tween =
+  //     ValueNotifier(Tween(begin: 0, end: 1));
+  late Animation _rotationAnimation;
   final Color _randomColor =
       Colors.primaries[Random().nextInt(Colors.primaries.length)];
 
   @override
   void initState() {
-    controller = AnimationController(
+    _animationController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 5),
-    )..addListener(() {
-        setState(() {});
-      });
-    controller.forward();
+    );
+    _rotationAnimation =
+        Tween(begin: 0.0, end: 1.0).animate(_animationController);
+    _animationController.forward();
+
     super.initState();
   }
 
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  void _onStart() {
-    if (!controller.isAnimating) {
-      controller.value = 0;
-      controller.forward();
-    }
-  }
+  // @override
+  // void dispose() {
+  //   controller.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
+    logger.i('build');
     return Scaffold(
       appBar: AppBar(
         title: const Text('Countdown Timer'),
@@ -54,38 +53,47 @@ class _CountdownScreenState extends State<CountdownScreen>
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Stack(
-                alignment: Alignment.center,
-                children: <Widget>[
-                  SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: CircularProgressIndicator(
-                      value: 1 - controller.value,
-                      semanticsLabel: 'Circular progress indicator',
-                      strokeWidth: 5,
-                      color: _randomColor,
+              // ValueListenableBuilder(
+              //   valueListenable: _tween,
+              //   builder: (_, tween, __) =>
+              // ),
+              AnimatedBuilder(
+                animation: _animationController,
+                builder: (_, __) => Stack(
+                  alignment: Alignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: CircularProgressIndicator(
+                        value: _rotationAnimation.value,
+                        strokeWidth: 5,
+                        color: _randomColor,
+                      ),
                     ),
-                  ),
-                  Text(
-                    '${num.parse((5 * (1 - controller.value)).toStringAsFixed(2)).ceil()}',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: _randomColor,
+                    Text(
+                      '${num.parse((5 * (1 - _rotationAnimation.value)).toStringAsFixed(2)).ceil()}',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: _randomColor,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               Gaps.v10,
               CupertinoButton(
-                  onPressed: _onStart,
-                  child: Text(
-                    'Start',
-                    style: TextStyle(
-                      color: _randomColor,
-                    ),
-                  ))
+                onPressed: () {
+                  _animationController.forward(from: 0.0);
+                },
+                child: Text(
+                  'Start',
+                  style: TextStyle(
+                    color: _randomColor,
+                  ),
+                ),
+              ),
             ],
           ),
         ),
