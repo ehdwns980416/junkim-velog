@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:junkim_velog/constants/sizes.dart';
 import 'package:junkim_velog/screens/practices/count_down_screen.dart';
 import 'package:junkim_velog/screens/practices/cupertino_datepicker_screen.dart';
+import 'package:junkim_velog/screens/practices/custom_overlay_screen.dart';
 import 'package:junkim_velog/screens/practices/hyperlink_screen.dart';
 import 'package:junkim_velog/screens/practices/kakao_address_screen.dart';
 import 'package:junkim_velog/screens/practices/system_ui_mode_screen.dart';
@@ -47,6 +48,10 @@ class _PracticePageListScreenState extends State<PracticePageListScreen> {
     PracticePage(
       label: 'Countdown Timer',
       targetScreen: const CountdownScreen(),
+    ),
+    PracticePage(
+      label: 'Custom Overlay',
+      targetScreen: const CustomOverlayScreen(),
     ),
   ];
 
